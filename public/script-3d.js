@@ -31,7 +31,6 @@ const WORLD_MOBILE = {
   contact: { cam: [50,   8, 12],  look: [50,   8,  -4] },
 };
 
-// ↓↓↓ MODIFIEZ ICI POUR AJUSTER LES SPRITES ↓↓↓
 const SPRITES_DESKTOP = {
   main:    { x:   4, y:   5, z:  12, scale:  7 },
   video:   { x: -36, y: 5.5, z:  10, scale: 11 },
@@ -43,9 +42,7 @@ const SPRITES_MOBILE = {
   video:   { x: -36, y:   7, z:  15, scale:  4 },
   contact: { x:  50, y:   5, z:  -2, scale: 19 },
 };
-// ↑↑↑ FIN ZONE D'ÉDITION SPRITES ↑↑↑
 
-// ↓↓↓ MODIFIEZ ICI POUR AJUSTER LES TRIANGLES ↓↓↓
 const TRIANGLES_DESKTOP = [
   { x:  5,  y: 12,  z:  5, width: 10.2, height: 10,  rotationZ: -48, rotationX: 75, rotationY: -15, color: 0x000000 },  // T0
   { x: -9,  y:  8,  z: 12, width: 10.2, height: 20,  rotationZ:   0, rotationX: 79, rotationY: -15, color: 0x000FF41 }, // T1
@@ -58,7 +55,7 @@ const TRIANGLES_DESKTOP = [
 ];
 
 const TRIANGLES_MOBILE = [
-  { x:  5,  y: 12,  z:  5, width: 10.2, height: 10,  rotationZ: -48, rotationX: 75, rotationY: -15, color: 0x000000 },  // T0
+  { x:  5,  y: 14,  z:  5, width: 10.2, height: 10,  rotationZ: -48, rotationX: 75, rotationY: -15, color: 0x000000 },  // T0
   { x:  6,  y:  8,  z:  3, width: 10.2, height: 20,  rotationZ:   0, rotationX: 79, rotationY: -15, color: 0x000FF41 }, // T1
   { x:  2,  y: -2,  z:  0, width: 10.2, height: 20,  rotationZ:   0, rotationX: 70, rotationY: -15, color: 0x000FF41 }, // T2
   { x: -36, y:  9,  z: 10, width:   12, height: 19,  rotationZ:  45, rotationX:  0, rotationY:  90, color: 0x000FF41 }, // T3
@@ -67,7 +64,6 @@ const TRIANGLES_MOBILE = [
   { x:  55, y: 23,  z: 22, width:   16, height: 32,  rotationZ:  90, rotationX:  0, rotationY:   0, color: 0x000FF41 }, // T6
   { x:  46, y: 13,  z:-10, width:   16, height: 32,  rotationZ:   0, rotationX: 92, rotationY:   0, color: 0x000FF41 }, // T7
 ];
-// ↑↑↑ FIN ZONE D'ÉDITION TRIANGLES ↑↑↑
 
 const TRIANGLE_MESHES = [];
 
