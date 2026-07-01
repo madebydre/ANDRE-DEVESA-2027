@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>André Devesa - Video Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Hammersmith+One&display=swap" rel="stylesheet"> <link rel="stylesheet" href="public/styles-3d.css" />
+</head>
+<body class="loading">
+
+  <!-- OUI ce site est partiellement fait avec CLAUDE mon pote CLAUDE et ouais ! Et merci à lui car je gagne du temps sur le JAVASCRIPT-->
+  <canvas id="three-canvas"></canvas>
+
+  <!-- Curseur personnalisé -->
+  <div class="cursor" id="cursor"></div>
+
+  <div class="site-ticker" aria-hidden="true">
+    <div class="site-ticker__track">
+      <span>André Devesa @2026. ATLUS PLEASE DON'T SUE ME </span>
+    </div>
+  </div>
+<!-- Email flottant 3D — scène Contact -->
+<a id="contact-email-hud" href="mailto:hello@andredevesa.com">
+  hello@andredevesa.com
+</a>
+  <!-- HUD toujours visible -->
+  <div id="hud">
+    <div class="hud-name" id="hudName"><img src="assets/svg/AndreDevesa.svg" class="hud-name-img" alt="André Devesa" ></div>
+    <div class="hud-scene" id="hudScene"></div>
+  </div>
+
+  <!-- ============== PANNEAU INTRO ============== -->
+  <div class="scene-panel" id="panel-intro">
+    <div class="intro-content">
+      <img src="assets/svg/AndreDevesa.svg" class="intro-title-img" alt="André Devesa" />
+      <img src="assets/svg/ClickAnywhere.svg" class="click-prompt" alt="Click Anywhere" />
+    </div>
+  </div>
+
+  <!-- ============== PANNEAU MENU PRINCIPAL ============== -->
+  <div class="scene-panel" id="panel-main">
+
+    <svg id="navHighlight"
+         xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 1190.6 841.9"
+         preserveAspectRatio="none"
+         overflow="visible"
+         xml:space="preserve">
+      <polygon fill="#00FF41" points="-106.6,403.8 1237,534.7 -95.4,493.2"/>
+      <polygon class="nav-highlight-dup" fill="#00FF41" points="-106.6,403.8 1237,534.7 -95.4,593.2"/>
+    </svg>
+
+    <div class="panel-left">
+      <nav class="main-nav">
+        <a class="nav-item" id="navVideo">
+          <img src="assets/svg/VideoEditing.svg" class="nav-img" alt="Video Editing" />
+          <img src="assets/svg/Textbox.svg" class="nav-textbox" alt="" />
+        </a>
+        <a class="nav-item" id="navContact">
+          <img src="assets/svg/Contact.svg" class="nav-img" alt="Contact" />
+          <img src="assets/svg/Textbox.svg" class="nav-textbox" alt="" />
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ============== PANNEAU VIDEO ============== -->
+  <div class="scene-panel" id="panel-video">
+    <div class="video-panel-content">
+      <!-- Conteneur avec SVG ReelBox / YouTubeBox en fond -->
+      <div class="reel-box-wrapper">
+        <img src="assets/svg/ReelBox.svg" id="reelBoxBg" class="reel-box-bg" alt="" />
+        <!-- Zones cliquables invisibles alignées sur les onglets dessinés dans le SVG -->
+        <div class="reel-tabs">
+          <div class="reel-tab active" data-tab="reels"></div>
+          <div class="reel-tab" data-tab="youtube"></div>
+        </div>
+        <div class="reel-inner">
+          <div class="reel-scroll-area">
+
+            <!-- Liste Reels -->
+            <div class="reel-list" id="reelsList">
+            <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Dans la bulle de 23wa</div>
+                  <div class="reel-meta">Mosaïque x 23wa · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DZmjblTI2TG/"></a></div>
+              <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Humain Normal vs Isack Hadjar</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DHjOqfvuqmF/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Humain Normal vs Novak Djokovic</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DYrssphqZsE/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Humain Normal vs Chef Etoilé</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DZkpOQIx6yt/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">C'était quoi ta première voiture ? (Part 2)</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DZQFTn9qVbi/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">C'était quoi ta première voiture ? (Part 1)</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DZKxDxpKmcv/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Honda - Balade Moto</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DZqMXHYR83z/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Citroën - Monaco Formula E Prix</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DYchgr0q0VE/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">KitKat Grand Break</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DYSNmFUq1g0/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Honda - Permis Moto</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DXrqcE_jG2g/"></a></div>
+              <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Record du Monde de Saut en Longueur</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DXPQHInEsem/"></a></div>     
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Record du Monde de Saut à la Perche</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DW6liUCjMp8/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Record du Monde de Saut en Hauteur</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DWMGzr2DLai/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Nike Mind001</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DWrMuGmDAnh/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x LEGO Ferrari</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DWl_j3VDHAW/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Flying Blue</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DWg6U1bjKSV/"></a></div>
+
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Interview Sinners Michael B Jordan 2</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DV83rGPEcEl/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x FULFIL</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DUbI3ONDN5C/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Sigma Boxing League - Teaser de lancement</div>
+                  <div class="reel-meta">SBL · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DJW5ykNsHVF/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Esquives après un KO</div>
+                  <div class="reel-meta">SBL · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DRFeRs1jSUb/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">@jeyssbae vs @tyssia.sp</div>
+                  <div class="reel-meta">SBL · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DQ4QmuIjbwn"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Travail d'esquive</div>
+                  <div class="reel-meta">SBL · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DRPmoDOjcj_"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Défi Corde à sauter</div>
+                  <div class="reel-meta">SBL · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DQMn7W9jTeD"></a></div>
+
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Humain normal vs Champion Boxe Anglaise</div>
+                  <div class="reel-meta">SBL · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DTdRwJ5DTtb"></a></div>
+
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Humain normal vs Top Boxeur Mondial</div>
+                  <div class="reel-meta">SBL · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DUgTrWQjUS5"></a></div>
+
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Défi réflexes cartes</div>
+                  <div class="reel-meta">SBL · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DUZMxgEDU3J"></a></div>
+
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">BRUNO SURACE x SBL</div>
+                  <div class="reel-meta">SBL · 2026</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/p/DVTij_-DSpC"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Galleries Lafayette Champs-Élysées</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DSAk1SAjAyb/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Micro-trottoir Merteuil</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DR9y6bZDL8K/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Google France</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DQwwpYXjIBT/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Nike Running</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DQhBZ_TjGoI/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Honda - Première fois moto</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DQKAajNjCFf/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">ski tutorial</div>
+                  <div class="reel-meta">DECATHLON · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.tiktok.com/@decathlon_quechua/video/7584426794208562454"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">MOGGED</div>
+                  <div class="reel-meta">DECATHLON · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.tiktok.com/@decathlon_quechua/video/7578889744030010647"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">still working on the joke sorry</div>
+                  <div class="reel-meta">DECATHLON · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.tiktok.com/@decathlon_quechua/video/7570449180318043415"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">move your thumb to the beat</div>
+                  <div class="reel-meta">DECATHLON · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.tiktok.com/@decathlon_quechua/video/7564872391038438678"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">POKY HIKE INCOMING</div>
+                  <div class="reel-meta">DECATHLON · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.tiktok.com/@decathlon_quechua/video/7566680159873551638"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Waking up to this view>>></div>
+                  <div class="reel-meta">DECATHLON · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.tiktok.com/@decathlon_quechua/video/7561448568293215510"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">It's the first of the month !</div>
+                  <div class="reel-meta">DECATHLON · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.tiktok.com/@decathlon_quechua/video/7556188520424049943"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Danone</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DPl70rwDMDq/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x ClickAndBoat</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DMVfsqgK5rv/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x ClickAndBoat (teaser)</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DMQLXopKXe7/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Renault 4 Etech</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DLMm6kpsqpC/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Interview Ana de Armas</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DKhl1m5KDJt/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Boursobank</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DKH0SXksblV/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Interview Adam Mosseri</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DJE1d48sWp2/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Roomtour - Chambre Bien-être</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DI6qptvsvnj/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Interview SINNERS - Films d'horreur</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DIl1Up1KlWf/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Micro-trottoir - Porsche préférée</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DH_ZkoBqjmS/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Roomtour - Chambre d'hôtel avec piscine intérieure</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DH1BrrJqFQK/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Interview Tony Parker</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DHEGlOTKuhK/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Basketball Africa League</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DGTSBJ3sL1p/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">IRONMAN (teaser)</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DGGJti5qrxd/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Je vais réaliser le rêve de l'un d'entre vous.</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DFfyYVPsqsd/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">5 Questions à Marcus</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DBy93K0tAVa/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">5 Questions à François Civil</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DBOrgHctBGR/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Gillette</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DBEjiiWNT9w/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x NBA</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DA6PugZNNKo/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x French Bee</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DAyf8yGtbKN/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">5 Questions à Sébastien Loeb</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/DAliQSzNHTQ/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Micro-trottoir Rose Festival</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C_3SGH_tfXL/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Decathlon (Paris 2024)</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C-X_jT9N9W6/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Groupe ADP 3</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C-S292FNqz2/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Samsung France</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C-F5mikNyyv/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Groupe ADP 2</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C-AzVH5Nn2E/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x Groupe ADP 1</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C9uuTUVxTeS/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Daetienne x BOSS</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C8hMxzdtN5I/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Wembanyama - Sportif préféré</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C8egijat4P3/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">2v1 tennis contre Tsonga</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C8cdg8YtUFP/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">5 Questions à Jo-Wilfried Tsonga</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C8UvyHotv-g/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">House of the Dragon S2 - Micro-trottoir acteurs</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C8HvwWHt7HZ/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Micro-trottoir acteurs Cannes - Métier de rêve</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C73jvUPNOaA/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">5 Questions à Fianso</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C7wrN1Htxzm/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">5 Questions à Arthus</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C7jpAwyNS_O/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Micro-trottoir acteurs Cannes - Meilleur film</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C7ei3jZt_dt/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Micro-trottoir acteurs Cannes - Quel rôle ?</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C7W6oMqp37T/"></a></div>
+<div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">4 Questions à Anya Taylor Joy & Chris Hemsworth</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+<a class="reel-play" href="https://www.instagram.com/reel/C7PIyW4NM5g/"></a></div></div>
+
+
+<div class="reel-list" id="youtubeList" style="display:none">
+   <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">23wa - Richter7 (Music Video)</div>
+                  <div class="reel-meta">23wa · 2026</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/PVA3U0MoCtY?si=tuYZBWszYqN5oFnf"></a>
+              </div>
+                            <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">J'ai Testé Paris</div>
+                  <div class="reel-meta">THEODORT · 2026</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/N9fTH1nDwjY?si=ug4ErjDZEhF5PDxy"></a>
+              </div>
+                            <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">On devine ta prépa avec ton dossier Parcoursup (feat Fafaselecto)</div>
+                  <div class="reel-meta">Major Prépa · 2026</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/GUrA8QgrO8Y?si=uUb4x8I8jxI2FRQg"></a>
+              </div>
+              <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">J'ai emmené Totoche à la Réunion.</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/sXxc1fjFQH8"></a>
+              </div>
+              <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Je suis allé au Superbowl.</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/jG5kZ2OIz7g"></a>
+              </div>
+              <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">J'ai essayé de battre tous les records du monde (Feat Kevin Mayer)</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/rMG61H_fqZA"></a>
+              </div>
+                <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">J'ai escaladé le Mont Fuji.</div>
+                  <div class="reel-meta">DAETIENNE · 2026</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/PzLBX8h3gD4"></a>
+              </div>
+                            <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">HYROX, le sport qui te brise mentalement.</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/jKZWof5eBxw"></a>
+              </div>
+                <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Le jour où je suis devenu un Ironman.</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/3Oa9SLg2yyQ?si=_Or40tFTAz6FqfF9"></a>
+              </div>
+              <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">J'ai survécu à une attaque de Guépard.</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+                <a class="reel-play" href="https://www.youtube.com/watch?v=Yvtew-mXqPo"></a>
+              </div>
+              <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">J'ai testé le sport le plus dur du monde. Feat Sam Laidlow</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/Yn8c8z8gLWs"></a>
+              </div>
+              <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Bateau à 10 euros vs Bateau à 20 000 000 d'euros.</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/9Q356CR8LtM"></a>
+              </div>
+              <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">J'ai trouvé la pire ville de France.</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/Pe36j7oHdIw"></a>
+              </div>
+              <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">J'ai trouvé la meilleure ville d'Europe.</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/H3w-UZeZtSg"></a>
+              </div>
+              <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Mesurer 2m08 en Chine.</div>
+                  <div class="reel-meta">DAETIENNE · 2025</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/n7kN9XBmYxs"></a>
+              </div>
+              <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Survis à 4 épreuves, gagne 5000 euros.</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/grHhuZ7Q1no"></a>
+              </div>
+               <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">Qui sera le meilleur cavalier ? Feat Juste Zoé</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/VuK5j3mAZlk"></a>
+              </div>
+                <div class="reel-item">
+                <div class="reel-info">
+                  <div class="reel-title">J'ai testé des Hotels de 10 à 10000 euros.</div>
+                  <div class="reel-meta">DAETIENNE · 2024</div>
+                </div>
+                <a class="reel-play" href="https://youtu.be/U48DJrNPEKs"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bouton retour fixé en bas à gauche -->
+    <div class="back-btn" id="backFromVideo"></div>
+  </div>
+
+  <!-- ============== PANNEAU CONTACT ============== -->
+  <div class="scene-panel" id="panel-contact">
+    <div class="contact-panel-content">
+      <div class="contact-box-wrapper">
+        <img src="assets/svg/ContactBox.svg" class="contact-box-bg" alt="" />
+        <div class="contact-inner">
+          <div class="contact-card">
+            <div class="contact-subtitle">
+              <span class="subtitle-bar"></span>
+              good news only
+            </div>
+            <form id="contactForm">
+            <div class="contact-field">
+              <label>Name</label>
+              <input type="text" name="name" placeholder="Ahmed Iter" />
+            </div>
+            <div class="contact-field">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="your@email.com" />
+            </div>
+            <div class="contact-field">
+              <label>Message</label>
+              <textarea name="message" placeholder="Bla bla bla..."></textarea>
+            </div>
+            <button type="submit" class="contact-submit">Envoyer</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="back-btn" id="backFromContact"></div>
+  </div>
+
+  <!-- Three.js ES module (local) -->
+  <script type="importmap">
+    { "imports": { "three": "/public/three.min.js" } }
+  </script>
+  <script type="module" src="public/script-3d.js"></script>
+</body>
+</html>
