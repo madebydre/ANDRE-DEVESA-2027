@@ -683,7 +683,6 @@ a.reel-play {
   margin: 1.5rem auto;
   justify-content: center;
   padding: 0;
-  margin-top:3rem;
   }
   .hud-scene {
 display: none;
@@ -695,6 +694,7 @@ display: none;
 
   /* ─── Ticker ──────────────────────────────────────────── */
   .site-ticker {
+    color:rgba(255, 255, 255, 0.692);
     justify-content: center;
     font-size: clamp(1px, 7px, 26px);
     letter-spacing: 2px;
@@ -818,7 +818,7 @@ display: none;
   position: fixed;
   left: 0;
   right: 0;
-  top: 100px;
+  top: 85px;
   bottom: 34px;
   display: flex;
   flex-direction: column;
@@ -857,7 +857,7 @@ display: none;
 }
 
 .mob-tab-reels {
-  height: 30px;
+  height: 34px;
   width: auto;
   display: block;
   filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.952));
@@ -914,8 +914,8 @@ display: none;
 #mob-contact-fab {
   display: none;
   position: fixed;
-  bottom: 52px;
-  right: 18px;
+  top: 100px;
+  right: 8px;
   width: 54px;
   height: 54px;
   background: none;

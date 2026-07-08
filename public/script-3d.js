@@ -30,7 +30,7 @@ const WORLD_MOBILE = {
   main:    { cam: [ 3,   5, 20],  look: [ 5,   5,   9] },
   video:   { cam: [-36, 5.5, 21], look: [-36, 5.5,  10] },
   contact: { cam: [50,   8, 12],  look: [50,   8,  -4] },
-  mobile:  { cam: [-35, 8, 21], look: [-36, 15, 0] },
+  mobile:  { cam: [-36, 8, 19], look: [-36, 13, 2] },
 };
 
 const SPRITES_DESKTOP = {
@@ -42,7 +42,7 @@ const SPRITES_DESKTOP = {
 const SPRITES_MOBILE = {
   main:    { x:   4, y:   5, z:   9, scale:  8 },
   video:   { x: -36, y:   7, z:  15, scale:  4 },
-  contact: { x:  50, y:   5, z:  -2, scale: 19 },
+  contact: { x:  50, y:   5, z:  20, scale: 19 },
 };
 
 const TRIANGLES_DESKTOP = [
