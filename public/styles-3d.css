@@ -679,9 +679,11 @@ a.reel-play {
  }
   .hud-name-img {
     
-    width: clamp(120px, 36vw, 195px);
-      margin: 1.5rem auto;
+  width: clamp(120px, 36vw, 170px);
+  margin: 1.5rem auto;
+  justify-content: center;
   padding: 0;
+  margin-top:3rem;
   }
   .hud-scene {
 display: none;
@@ -693,8 +695,8 @@ display: none;
 
   /* ─── Ticker ──────────────────────────────────────────── */
   .site-ticker {
-    height: 26px;
-    font-size: 10px;
+    justify-content: center;
+    font-size: clamp(1px, 7px, 26px);
     letter-spacing: 2px;
   }
 
@@ -798,4 +800,178 @@ display: none;
   .contact-field textarea { font-size: 12px; }
   .contact-submit { padding: 9px 20px; font-size: 14px; }
   .back-btn::before { font-size: 2.8rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PANNEAU MOBILE DÉDIÉ (#panel-mobile)
+   Page unique téléphone — Reels & YouTube en onglets
+═══════════════════════════════════════════════════════════ */
+
+/* Caché sur desktop */
+#panel-mobile { display: none; }
+
+@media (max-width: 768px) {
+  #panel-mobile { display: flex; }
+}
+
+.mob-panel-inner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 100px;
+  bottom: 34px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ─── Barre d'onglets ────────────────────────────────────── */
+.mob-tab-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0;
+  padding: 0 20px;
+  border-bottom: 1px solid #1e1e1e;
+  flex-shrink: 0;
+}
+
+.mob-tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  padding: 30px 16px 10px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: -1px;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mob-tab.active {
+  opacity: 1;
+  border-bottom-color: var(--green);
+}
+
+.mob-tab-reels {
+  height: 30px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.952));
+  }
+
+.mob-tab-yt {
+  height: 36px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.952));
+}
+
+
+
+/* ─── Zone scrollable ────────────────────────────────────── */
+.mob-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--green) transparent;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.mob-scroll-area::-webkit-scrollbar { width: 3px; }
+.mob-scroll-area::-webkit-scrollbar-track { background: transparent; }
+.mob-scroll-area::-webkit-scrollbar-thumb { background: var(--green); }
+
+/* Hérite des styles .reel-item — ajustements tactiles */
+.mob-list .reel-item {
+  padding: 13px 20px;
+  position: relative;
+}
+
+.mob-list .reel-item .reel-play {
+  width: 30px;
+  height: 30px;
+  position: static;
+}
+
+/* Zone de tap étendue à toute la ligne */
+.mob-list .reel-item .reel-play::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.mob-list .reel-title { font-size: 13px; }
+.mob-list .reel-meta  { font-size: 10px; }
+
+/* ─── FAB Contact (étoile flottante) ─────────────────────── */
+#mob-contact-fab {
+  display: none;
+  position: fixed;
+  bottom: 52px;
+  right: 18px;
+  width: 54px;
+  height: 54px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 9500;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease;
+}
+
+#mob-contact-fab img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: filter 0.2s ease;
+}
+
+#mob-contact-fab:active {
+  transform: scale(0.87);
+}
+
+#mob-contact-fab:active img {
+  filter: drop-shadow(0 0 16px rgba(0, 255, 65, 0.9));
+}
+
+@media (max-width: 768px) {
+  #mob-contact-fab { display: block; }
+}
+
+/* ─── Toast "Email copié" ────────────────────────────────── */
+#mob-toast {
+  display: none;
+  position: fixed;
+  bottom: 118px;
+  right: 18px;
+  background: var(--green);
+  color: #000;
+  font-family: 'Hammersmith One', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 9501;
+  white-space: nowrap;
+}
+
+#mob-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  #mob-toast { display: block; }
 }

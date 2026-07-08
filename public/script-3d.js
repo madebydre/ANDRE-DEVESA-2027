@@ -22,6 +22,7 @@ const WORLD = {
   main:    { cam: [ 5,   5, 16], look: [ 0,  5,  10] },
   video:   { cam: [-43,  7, 12], look: [-30, 5.5,  0] },
   contact: { cam: [61,   3,  3], look: [ 0, 40,   2] },
+  mobile:  { cam: [-43,  7, 12], look: [-30, 5.5,  0] },
 };
 
 const WORLD_MOBILE = {
@@ -29,6 +30,7 @@ const WORLD_MOBILE = {
   main:    { cam: [ 3,   5, 20],  look: [ 5,   5,   9] },
   video:   { cam: [-36, 5.5, 21], look: [-36, 5.5,  10] },
   contact: { cam: [50,   8, 12],  look: [50,   8,  -4] },
+  mobile:  { cam: [-35, 8, 21], look: [-36, 15, 0] },
 };
 
 const SPRITES_DESKTOP = {
@@ -224,6 +226,7 @@ const panels = {
   main:    document.getElementById('panel-main'),
   video:   document.getElementById('panel-video'),
   contact: document.getElementById('panel-contact'),
+  mobile:  document.getElementById('panel-mobile'),
 };
 
 const hudNameEl  = document.getElementById('hudName');
@@ -234,24 +237,26 @@ const LABELS = {
   main:    'HOME',
   video:   'Video Editing',
   contact: 'Contact',
+  mobile:  'Video Editing',
 };
 
 function showPanel(name) {
   Object.entries(panels).forEach(([key, el]) => {
     el.classList.toggle('active', key === name);
   });
-  hudSceneEl.textContent = LABELS[name];
+  hudSceneEl.textContent = LABELS[name] || '';
   hudNameEl.classList.toggle('visible', name !== 'intro');
   emailEl.classList.toggle('visible', name === 'contact');
   Object.entries(SCENE_SPRITES).forEach(([key, c]) => {
-    c.targetOpacity = ((c.sceneKey || key) === name) ? 1 : 0;
+    const spriteScene = c.sceneKey || key;
+    c.targetOpacity = (spriteScene === name || (name === 'mobile' && spriteScene === 'video')) ? 1 : 0;
   });
 }
 
 function navigateTo(name) {
   if (name === currentScene) return;
   currentScene = name;
-  triggerLazyLoad(name);
+  triggerLazyLoad(name === 'mobile' ? 'video' : name);
   const def = getWorldDef(name);
   camTgt.x  = def.cam[0];  camTgt.y  = def.cam[1];  camTgt.z  = def.cam[2];
   camTgt.lx = def.look[0]; camTgt.ly = def.look[1]; camTgt.lz = def.look[2];
@@ -308,7 +313,7 @@ document.addEventListener('touchend', () => {
 });
 
 document.querySelectorAll(
-  'a, button, input, textarea, .nav-item, .back-btn, .reel-tab, .reel-item, .social-link, .click-prompt'
+  'a, button, input, textarea, .nav-item, .back-btn, .reel-tab, .reel-item, .social-link, .click-prompt, .mob-tab, #mob-contact-fab'
 ).forEach(el => {
   el.addEventListener('mouseenter', () => cursorEl.classList.add('hover'));
   el.addEventListener('mouseleave', () => cursorEl.classList.remove('hover'));
@@ -316,7 +321,7 @@ document.querySelectorAll(
 
 function initEvents() {
   panels.intro.addEventListener('click', () => {
-    if (currentScene === 'intro') navigateTo('main');
+    if (currentScene === 'intro') navigateTo(isMobilePortrait() ? 'mobile' : 'main');
   });
 
   document.getElementById('navVideo').addEventListener('click', (e) => {
@@ -327,11 +332,12 @@ function initEvents() {
     e.preventDefault();
     navigateTo('contact');
   });
-  document.getElementById('backFromVideo').addEventListener('click', () => navigateTo('main'));
-  document.getElementById('backFromContact').addEventListener('click', () => navigateTo('main'));
+  document.getElementById('backFromVideo').addEventListener('click', () => navigateTo(isMobilePortrait() ? 'mobile' : 'main'));
+  document.getElementById('backFromContact').addEventListener('click', () => navigateTo(isMobilePortrait() ? 'mobile' : 'main'));
 
   document.getElementById('hudName').addEventListener('click', () => {
-    if (currentScene !== 'intro' && currentScene !== 'main') navigateTo('main');
+    const home = isMobilePortrait() ? 'mobile' : 'main';
+    if (currentScene !== 'intro' && currentScene !== home) navigateTo(home);
   });
 
   document.getElementById('contactForm').addEventListener('submit', (e) => {
@@ -365,6 +371,52 @@ function initEvents() {
   });
 }
 
+function initMobilePanel() {
+  const mobReelsList   = document.getElementById('mob-reels-list');
+  const mobYoutubeList = document.getElementById('mob-youtube-list');
+  const reelsSource    = document.getElementById('reelsList');
+  const ytSource       = document.getElementById('youtubeList');
+
+  if (reelsSource && mobReelsList) {
+    mobReelsList.innerHTML = reelsSource.innerHTML;
+    mobReelsList.querySelectorAll('a.reel-play').forEach(a => {
+      a.target = '_blank';
+      a.rel    = 'noopener noreferrer';
+    });
+  }
+  if (ytSource && mobYoutubeList) {
+    mobYoutubeList.innerHTML = ytSource.innerHTML;
+    mobYoutubeList.querySelectorAll('a.reel-play').forEach(a => {
+      a.target = '_blank';
+      a.rel    = 'noopener noreferrer';
+    });
+  }
+
+  document.querySelectorAll('.mob-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.mob-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const isYoutube = tab.dataset.tab === 'youtube';
+      if (mobReelsList)   mobReelsList.style.display   = isYoutube ? 'none' : '';
+      if (mobYoutubeList) mobYoutubeList.style.display = isYoutube ? ''     : 'none';
+      const scrollArea = document.getElementById('mobScrollArea');
+      if (scrollArea) scrollArea.scrollTop = 0;
+    });
+  });
+
+  const fabEl   = document.getElementById('mob-contact-fab');
+  const toastEl = document.getElementById('mob-toast');
+  if (fabEl && toastEl) {
+    fabEl.addEventListener('click', () => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText('hello@andredevesa.com').catch(() => {});
+      }
+      toastEl.classList.add('show');
+      setTimeout(() => toastEl.classList.remove('show'), 2500);
+    });
+  }
+}
+
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -392,6 +444,7 @@ window.addEventListener('orientationchange', () => {
 (function init() {
   createSprites();
   initEvents();
+  initMobilePanel();
 
   const intro = getWorldDef('intro');
   camera.position.set(...intro.cam);

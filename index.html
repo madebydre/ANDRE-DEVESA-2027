@@ -722,6 +722,35 @@
     <div class="back-btn" id="backFromContact"></div>
   </div>
 
+  <!-- ============== PANNEAU MOBILE ============== -->
+  <div class="scene-panel" id="panel-mobile">
+    <div class="mob-panel-inner">
+
+      <div class="mob-tab-bar">
+        <button class="mob-tab active" data-tab="reels" aria-label="Reels">
+          <img src="assets/svg/Reels.svg" alt="Reels" class="mob-tab-reels" />
+        </button>
+        <button class="mob-tab" data-tab="youtube" aria-label="YouTube">
+          <img src="assets/svg/YouTube.svg" alt="YouTube" class="mob-tab-yt" />
+        </button>
+      </div>
+
+      <div class="mob-scroll-area" id="mobScrollArea">
+        <div id="mob-reels-list" class="mob-list"></div>
+        <div id="mob-youtube-list" class="mob-list" style="display:none"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Contact FAB — mobile uniquement -->
+  <button id="mob-contact-fab" aria-label="Copier l'adresse email">
+    <img src="assets/svg/etoile.svg" alt="" aria-hidden="true" />
+  </button>
+
+  <!-- Toast feedback -->
+  <div id="mob-toast" role="status">Email copié !</div>
+
   <!-- Three.js ES module (local) -->
   <script type="importmap">
     { "imports": { "three": "/public/three.min.js" } }
