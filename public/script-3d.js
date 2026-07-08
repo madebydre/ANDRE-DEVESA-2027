@@ -41,8 +41,8 @@ const SPRITES_DESKTOP = {
 
 const SPRITES_MOBILE = {
   main:    { x:   4, y:   5, z:   9, scale:  8 },
-  video:   { x: -36, y:   7, z:  15, scale:  4 },
-  contact: { x:  50, y:   5, z:  20, scale: 19 },
+  video:   { x: -36, y:   7, z:  15, scale:  4 }, // ← Visu2 : éditer ici pour mobile
+  contact: { x: -100, y:   4, z:   8, scale:  9 }, // ← Visu3 : éditer ici pour mobile
 };
 
 const TRIANGLES_DESKTOP = [
@@ -186,6 +186,8 @@ function loadSpriteNow(svgPath, storageKey, x, y, z, baseScale, sceneKey) {
     container.targetOpacity = initOpacity;
     container.loaded        = true;
     scene.add(sprite);
+    // Resync immédiatement sur SPRITES_MOBILE/DESKTOP (ignore les lazyArgs périmés)
+    applySpritesLayout();
   };
   img.onerror = () => console.warn('Sprite not found:', svgPath);
   img.src = svgPath;
@@ -249,14 +251,27 @@ function showPanel(name) {
   emailEl.classList.toggle('visible', name === 'contact');
   Object.entries(SCENE_SPRITES).forEach(([key, c]) => {
     const spriteScene = c.sceneKey || key;
-    c.targetOpacity = (spriteScene === name || (name === 'mobile' && spriteScene === 'video')) ? 1 : 0;
+    const isMobileScene = name === 'mobile';
+    c.targetOpacity = (
+      spriteScene === name ||
+      (isMobileScene && (spriteScene === 'video' || spriteScene === 'contact'))
+    ) ? 1 : 0;
   });
+
+  // Affiche/cache le bouton étoile uniquement hors intro
+  const mobFab = document.getElementById('mob-contact-fab');
+  if (mobFab) mobFab.classList.toggle('fab-hidden', name === 'intro');
 }
 
 function navigateTo(name) {
   if (name === currentScene) return;
   currentScene = name;
-  triggerLazyLoad(name === 'mobile' ? 'video' : name);
+  if (name === 'mobile') {
+    triggerLazyLoad('video');
+    triggerLazyLoad('contact'); // charge aussi Visu3 pour la scène mobile
+  } else {
+    triggerLazyLoad(name);
+  }
   const def = getWorldDef(name);
   camTgt.x  = def.cam[0];  camTgt.y  = def.cam[1];  camTgt.z  = def.cam[2];
   camTgt.lx = def.look[0]; camTgt.ly = def.look[1]; camTgt.lz = def.look[2];

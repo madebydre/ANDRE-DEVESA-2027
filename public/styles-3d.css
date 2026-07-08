@@ -942,6 +942,9 @@ display: none;
   filter: drop-shadow(0 0 16px rgba(0, 255, 65, 0.9));
 }
 
+/* Caché pendant l'intro, activé dès que la scène change */
+#mob-contact-fab.fab-hidden { display: none !important; }
+
 @media (max-width: 768px) {
   #mob-contact-fab { display: block; }
 }
