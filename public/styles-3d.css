@@ -681,7 +681,7 @@ a.reel-play {
     justify-content: center;
  }
   .hud-name-img {
-  width: clamp(120px, 36vw, 170px);
+  width: clamp(160px, 54vw, 200px);
   margin: 1.2rem auto;
   justify-content: center;
   padding: 0;
