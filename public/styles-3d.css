@@ -105,9 +105,7 @@ body.js-ready { opacity: 1; transition: opacity 0.15s ease; }
   width: clamp(160px, 10vw, 400px);
   height: auto;
   display: block;
-  margin: 2rem 2rem 20px 2rem auto;
-  padding-left: 2rem;
-  padding-top: 1rem;
+  margin: 2rem 0 20px 2rem;
   transition: filter 0.2s ease-in-out;
 }
 .hud-name:hover .hud-name-img {
@@ -170,7 +168,6 @@ body.js-ready { opacity: 1; transition: opacity 0.15s ease; }
   opacity: 0;
   visibility: hidden;
   transition: opacity 0s ease, visibility 0s linear 0.55s;
-  body:not(.js-ready) .scene-panel { visibility: hidden !important; opacity: 0 !important; }
 }
 .scene-panel.active {
   pointer-events: auto;
@@ -190,10 +187,9 @@ body:not(.js-ready) .scene-panel {
   text-align: center;
 }
 .intro-content {
-  width: min(90vw, 900px); margin: 0 auto;
-  text-align: center;
   width: min(90vw, 900px);
   margin: 0 auto;
+  text-align: center;
 }
 .intro-name {
   font-family: 'Almendra', serif;
@@ -220,7 +216,7 @@ body:not(.js-ready) .scene-panel {
   color: var(--white);
   letter-spacing: 3px;
   padding: 9px 40px 50px;
-  display: block; width: clamp(160px, 28vw, 400px); height: auto; margin-left: auto; margin-right: auto;
+  display: block;
   width: clamp(160px, 28vw, 400px);
   height: auto;
   margin-left: auto;
@@ -241,14 +237,15 @@ body:not(.js-ready) .scene-panel {
 
 /* ─── IMAGES NAV (remplacement du texte) ─────────────────── */
 .nav-img {
-  height: clamp(42px, 6.5vw, 88px);
+  height: clamp(58px, 5.5vw, 78px);
   width: auto;
   max-width: 100%;
   display: block;
   transition: 0.12s ease;
   position: relative;
   z-index: 1;
-  height: clamp(58px, 5.5vw, 78px);
+  -webkit-user-drag: none;
+  user-drag: none;
 }
 
 .nav-item:hover .nav-img {
@@ -286,6 +283,8 @@ body:not(.js-ready) .scene-panel {
   position: relative;                     /* contexte pour .nav-textbox */
   text-decoration: none;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .nav-item:hover { color: var(--green); }
 
@@ -300,8 +299,10 @@ body:not(.js-ready) .scene-panel {
   height: auto;
   z-index: 3;
   opacity: 0;
-mix-blend-mode: difference;
-pointer-events: none;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-drag: none;
 }
 .nav-item:hover .nav-textbox {
   opacity: 1;
@@ -677,14 +678,12 @@ a.reel-play {
   .cursor { display: none; }
 
   /* ─── HUD ─────────────────────────────────────────────── */
-  #hud { padding: auto;
+  #hud {
     justify-content: center;
- }
+  }
   .hud-name-img {
-  width: clamp(160px, 54vw, 200px);
-  margin: 1.2rem auto;
-  justify-content: center;
-  padding: 0;
+    width: clamp(160px, 54vw, 200px);
+    margin: 1.2rem auto;
   }
   .hud-scene {
 display: none;
